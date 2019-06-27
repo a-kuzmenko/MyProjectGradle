@@ -14,6 +14,13 @@ public class SendLetterTest extends BaseTest {
 
         app.newEmail.createLetter();
 
-        //Assert.assertEquals(app.dashboard.getUserEmail(), validUser.getEmail(), "Email is not valid");
+        Assert.assertEquals(app.dashboard.getConfirmation(), "Письмо успешно отправлено адресатам");
+
+        app.dashboard.clickOnIncomingEmail();
+
+        app.dashboard.clickOnIncomingLetter();
+
+        Assert.assertEquals(app.dashboard.getIncomingTheme(), validEmail.getTheme());
+        Assert.assertEquals(app.dashboard.getIncomingMessageBody(), validEmail.getText());
     }
 }
