@@ -4,6 +4,7 @@
     <test name="LoginTest">
         <classes>
             <class name="com.it.tests.LoginTest"/>
+            <class name="com.it.tests.SendLetterTest"/>
         </classes>
     </test>
 </suite>

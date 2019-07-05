@@ -21,14 +21,21 @@ dependencies {
 
 task chromeTest(type: Test){
     systemProperty "driver", "chrome"
-    userTestNG{
-        suites "src/test/resources/testNg.xml"
+    useTestNG{
+        suites 'src/test/resources/testNg.xml'
     }
 }
 
 task geckoTest(type: Test){
     systemProperty "driver", "gecko"
-    user2TestNG{
+    useTestNG{
         suites "src/test/resources/testNg.xml"
+    }
+}
+
+test {
+    systemProperty "driver", "gecko"
+    useTestNG() {
+        suites 'src/test/resources/testNg.xml'
     }
 }

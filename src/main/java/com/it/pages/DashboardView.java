@@ -1,7 +1,14 @@
 package com.it.pages;
 
+import com.it.NewEmail;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DashboardView extends BasePage{
 	@FindBy(xpath="//div[@class='section_nav']//span")
@@ -24,6 +31,12 @@ public class DashboardView extends BasePage{
 
 	@FindBy(xpath="//div[@class='message_body']//pre")
 	private WebElement incomingMessageBody;
+
+	@FindBy(xpath="//div[contains(@class,'row')]//input")
+	private WebElement checkcolumnsLocator;
+
+	@FindBy(xpath="//div[contains(@class,'row')]//input")
+	private WebElement clickOnDeleteButton;
 
 	public String getUserEmail(){
 	    return  userEmail.getText();
@@ -53,6 +66,30 @@ public class DashboardView extends BasePage{
 
 	public DashboardView clickOnIncomingLetter() {
 		incomingLetter.click();
+		return this;
+	}
+
+	public DashboardView clickOnDeleteIncomingLetter(String theme) {
+        getIncomingTheme();
+		clickOnDeleteButton.click();
+		return this;
+	}
+
+	public boolean isLetterRecordPresent(NewEmail letter) {
+		Map<Integer, String> data = new HashMap<>();
+		data.put(1, letter.getTo());
+		data.put(2, letter.getTheme());
+		data.put(3, letter.getText());
+
+		return true;
+	}
+
+	public DashboardView getIncomingLetters(String theme) {
+		By mySelector = By.xpath(String.valueOf(checkcolumnsLocator));
+		List<WebElement> checkColumns = driver.findElements(mySelector);
+		for (WebElement webElement : checkColumns) {
+			System.out.println(webElement.getText());
+		}
 		return this;
 	}
 }
